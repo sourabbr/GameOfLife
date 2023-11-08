@@ -10,5 +10,6 @@ typedef struct CommandLineArguments {
 
 void usage();
 void parseArguments(int argc, char** argv, Arguments* args);
+void printArguments(Arguments* args);
 
 #endif // __ARGS__

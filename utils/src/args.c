@@ -47,3 +47,12 @@ void parseArguments(int argc, char** argv, Arguments* args) {
         usage();
     }
 }
+
+void printArguments(Arguments* args) {
+    printf("***** Arguments *****\n");
+    printf("Iterations: %d\n", args->iterations);
+    printf("Grid Size: %d\n", args->grid_size);
+    printf("Input File Name: %s\n", args->input_file_name);
+    printf("Output File Name: %s\n", args->output_file_name);
+    printf("*********************\n");
+}
