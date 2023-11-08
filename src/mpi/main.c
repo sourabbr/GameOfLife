@@ -5,7 +5,7 @@
 // #include <mpi.h>
 
 
-#include "../utils/args.h"
+#include "../common/args.h"
 
 Arguments args;
 
