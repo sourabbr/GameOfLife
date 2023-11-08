@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "headers/args.h"
+#include "args.h"
 
 void usage() {
     fprintf(stderr,

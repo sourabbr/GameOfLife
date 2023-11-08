@@ -5,7 +5,7 @@
 // #include <mpi.h>
 
 
-#include "../../utils/src/headers/args.h"
+#include "../utils/args.h"
 
 Arguments args;
 

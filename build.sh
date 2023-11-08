@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define the source files
-MAIN_FILE="mpi/src/game_of_life.c"
-ARGS_FILE="utils/src/args.c"
+MPI="src/mpi/*.c"
+UTILS="src/utils/*.c"
 
 # Binary directory
 BIN_DIR="bin"
@@ -12,7 +12,7 @@ OUTPUT_BINARY="$BIN_DIR/game_of_life"
 # Compile the program
 compile() {
     mkdir -p $BIN_DIR
-    gcc -o $OUTPUT_BINARY $MAIN_FILE $ARGS_FILE
+    gcc -o $OUTPUT_BINARY $MPI $UTILS
     if [ $? -eq 0 ]; then
         echo "Compilation successful. Binary created: $OUTPUT_BINARY"
     else
