@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 #include <mpi.h>
 
 #include "../common/args.h"
@@ -11,7 +12,7 @@ Arguments args;
 
 int main(int argc, char** argv) {
     int ndims = 2, reorder = 1;
-    int dims[num_dims], periods[num_dims];
+    int dims[ndims], periods[ndims];
     int my_rank, num_procs;
     MPI_Comm comm;
 
