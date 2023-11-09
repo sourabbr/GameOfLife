@@ -32,9 +32,11 @@ void parseArguments(int argc, char** argv, Arguments* args) {
                 break;
             case 'i': // Input File Name
                 args->input_file_name = optarg;
+                // S_TODO: Check if file exists
                 break;
             case 'o': // Output File Name
                 args->output_file_name = optarg;
+                // S_TODO: Check if valid path for file
                 break;
             default: // Unknown option
                 usage();

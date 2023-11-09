@@ -1,5 +1,5 @@
-#ifndef __ARGS__
-#define __ARGS__
+#ifndef ARGS_H
+#define ARGS_H
 
 typedef struct CommandLineArguments {
     int iterations;
@@ -12,4 +12,4 @@ void usage();
 void parseArguments(int argc, char** argv, Arguments* args);
 void printArguments(Arguments* args);
 
-#endif // __ARGS__
+#endif // ARGS_H
