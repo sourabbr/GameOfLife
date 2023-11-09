@@ -23,7 +23,9 @@ int main(int argc, char** argv) {
     
     // Parse command line arguments
     parseArguments(argc, argv, &args);
-    printArguments(&args);
+    if (my_rank == 0) {
+        printArguments(&args);
+    }
 
     // Create cartesian topology for processes and assign neighbours
     dims[0] = dims[1] = (int) sqrt(num_procs);
