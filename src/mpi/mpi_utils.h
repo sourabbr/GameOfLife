@@ -12,10 +12,10 @@ typedef struct NeighborRanks {
 	int down;
 	int left;
 	int right;
-	int down_left;
-	int down_right;
 	int up_left;
 	int up_right;
+	int down_left;
+	int down_right;
 } NeighborRanks;
 
 typedef struct SubGrid {

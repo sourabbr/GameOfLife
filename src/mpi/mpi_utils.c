@@ -16,7 +16,7 @@ void determineAdjacentRanks(MPI_Comm comm, NeighborRanks* neighbor_ranks) {
     neighbor_ranks->down_left = (neighbor_ranks->left != MPI_PROC_NULL) ? neighbor_ranks->down - 1 : MPI_PROC_NULL;
     neighbor_ranks->down_right = (neighbor_ranks->right != MPI_PROC_NULL) ? neighbor_ranks->down + 1 : MPI_PROC_NULL;
 
-    // Adjust for any ranks that are invalid (-1 or less) to MPI_PROC_NULL
+    // Adjust for any ranks that are invalid to MPI_PROC_NULL
     if (neighbor_ranks->down < 0) neighbor_ranks->down = MPI_PROC_NULL;
     if (neighbor_ranks->up < 0) neighbor_ranks->up = MPI_PROC_NULL;
     if (neighbor_ranks->left < 0) neighbor_ranks->left = MPI_PROC_NULL;
@@ -91,7 +91,7 @@ void parallelFileWrite(const char* destination_file, int rank, int total_procs, 
         MPI_File_seek(fd, position_to_write, MPI_SEEK_SET);
 
         for (int col = 0; col < subgrid->cols; ++col) {
-            buffer_row[col] = proc_grid[current_row + 1][col + 1];
+            buffer_row[col] = (char)proc_grid[current_row + 1][col + 1];
         }
 
         MPI_File_write(fd, buffer_row, subgrid->cols, MPI_CHAR, MPI_STATUS_IGNORE);
@@ -104,5 +104,86 @@ void parallelFileWrite(const char* destination_file, int rank, int total_procs, 
 
     free(buffer_row);
     MPI_File_close(&fd);
+}
+
+void simulateGOL(char** cur_step_grid, int my_rank, int num_procs, MPI_Comm comm, NeighborRanks* neighbors, SubGrid* subgrid, Arguments* args) {
+
+    MPI_Datatype column, row;
+    MPI_Request send[8], recv[8];
+    MPI_Status status[8];
+
+    MPI_Type_vector(subgrid->rows, 1, subgrid->cols + 2, MPI_CHAR, &column);
+    MPI_Type_commit(&column);
+    MPI_Type_contiguous(subgrid->cols, MPI_CHAR, &row);
+    MPI_Type_commit(&row);
+
+    char** next_step_grid = create_2d_char_array(subgrid->rows + 2, subgrid->cols + 2);
+    char** temp;
+
+    for (int i = 0; i < args->iterations; ++i) {
+        // Receive and send data to each neighbor process
+
+        // Receive and send: UP
+        MPI_Irecv(&cur_step_grid[0][1], 1, row, neighbors->up, 0, comm, &recv[0]);
+        MPI_Isend(&cur_step_grid[1][1], 1, row, neighbors->up, 0, comm, &send[0]);
+
+        // Receive and send: DOWN
+        MPI_Irecv(&cur_step_grid[subgrid->rows + 1][1], 1, row, neighbors->down, 0, comm, &recv[1]);
+        MPI_Isend(&cur_step_grid[subgrid->rows][1], 1, row, neighbors->down, 0, comm, &send[1]);
+
+        // Receive and send: LEFT
+        MPI_Irecv(&cur_step_grid[1][0], 1, column, neighbors->left, 0, comm, &recv[2]);
+        MPI_Isend(&cur_step_grid[1][1], 1, column, neighbors->left, 0, comm, &send[2]);
+
+        // Receive and send: RIGHT
+        MPI_Irecv(&cur_step_grid[1][subgrid->cols + 1], 1, column, neighbors->right, 0, comm, &recv[3]);
+        MPI_Isend(&cur_step_grid[1][subgrid->cols], 1, column, neighbors->right, 0, comm, &send[3]);
+
+        // Receive and send: UP LEFT
+        MPI_Irecv(&cur_step_grid[0][0], 1, MPI_CHAR, neighbors->up_left, 0, comm, &recv[4]);
+        MPI_Isend(&cur_step_grid[1][1], 1, MPI_CHAR, neighbors->up_left, 0, comm, &send[4]);
+
+        // Receive and send: UP RIGHT
+        MPI_Irecv(&cur_step_grid[0][subgrid->cols + 1], 1, MPI_CHAR, neighbors->up_right, 0, comm, &recv[5]);
+        MPI_Isend(&cur_step_grid[1][subgrid->cols], 1, MPI_CHAR, neighbors->up_right, 0, comm, &send[5]);
+
+        // Receive and send: DOWN LEFT
+        MPI_Irecv(&cur_step_grid[subgrid->rows + 1][0], 1, MPI_CHAR, neighbors->down_left, 0, comm, &recv[6]);
+        MPI_Isend(&cur_step_grid[subgrid->rows][1], 1, MPI_CHAR, neighbors->down_left, 0, comm, &send[6]);
+
+        // Receive and send: DOWN RIGHT
+        MPI_Irecv(&cur_step_grid[subgrid->rows + 1][subgrid->cols + 1], 1, MPI_CHAR, neighbors->down_right, 0, comm, &recv[7]);
+        MPI_Isend(&cur_step_grid[subgrid->rows][subgrid->cols], 1, MPI_CHAR, neighbors->down_right, 0, comm, &send[7]);
+
+        // No need to wait for receive from all neighbor processes for calculating next step for inner grid
+        // S_TODO: Calculate inner grid
+
+        // Wait to receive from all neighbor processes.
+        MPI_Waitall(8, recv, status);
+
+        // Now, we can calculate the next step for outer grid
+        // S_TODO: Calculate outer grid
+
+        // Update current step grid with calculated next step grid
+        temp = cur_step_grid;
+        cur_step_grid = next_step_grid;
+        next_step_grid = temp;
+
+        // Wait to send to all neighbor processes.
+        MPI_Waitall(8, send, status);
+
+        // Output current step grid
+        parallelFileWrite(args->output_file, my_rank, num_procs, args->grid_size, subgrid, cur_step_grid);
+
+        // Wait for all processes to finish writing to output file
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+
+    MPI_Type_free(&column);
+    MPI_Type_free(&row);
+    // Free the entrie grid
+    free(next_step_grid[0]);
+    // Free pointers to rows in the grid
+    free(next_step_grid);
 }
 

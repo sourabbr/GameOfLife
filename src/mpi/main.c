@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
+#include <time.h>
 #include <mpi.h>
 
 #include "../common/args.h"
@@ -47,11 +48,29 @@ int main(int argc, char** argv) {
     char** grid = parallelFileRead(args.input_file_name, my_rank, args.grid_size, &subgrid);
     parallelFileWrite(args.output_file_name, my_rank, num_procs, args.grid_size, &subgrid, grid);
 
-
     // Wait for all processes to finish reading the input file
     MPI_Barrier(MPI_COMM_WORLD);
 
+    double start_time, end_time, time_elapsed;
+    double global_time = 0.0;
 
+    start_time = MPI_Wtime();
+
+    // Simulation of Game of Life
+    simulateGOL(grid, my_rank, num_procs, comm, &neighbors, &subgrid, &args);
+    
+    end_time = MPI_Wtime();
+    time_elapsed = end_time - start_time;
+    MPI_Reduce(&time_elapsed, &global_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    if (my_rank == 0) {
+        printf("Time elapsed: %f seconds\n", global_time);
+    }
+
+    // Free the entrie grid
+    free(grid[0]);
+    // Free pointers to rows in the grid
+    free(grid);
+    
     MPI_Finalize();
 
     return 0;
