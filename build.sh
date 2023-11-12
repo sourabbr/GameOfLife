@@ -25,7 +25,9 @@ compile() {
 clean() {
     if [ -d $BIN_DIR ]; then
         rm -rf $BIN_DIR
-        echo "Cleanup successful. Removed: $OUTPUT_BINARY"
+        rm -rf "game_of_life.out"
+        rm -rf "out.txt"
+        echo "Cleanup successful."
     else
         echo "Nothing to clean. The binary does not exist."
     fi

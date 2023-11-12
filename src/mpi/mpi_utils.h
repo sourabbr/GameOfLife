@@ -7,6 +7,8 @@
 #include <math.h>
 #include <mpi.h>
 
+#include "../common/args.h"
+
 typedef struct NeighborRanks {
 	int up;
 	int down;
@@ -29,6 +31,6 @@ void splitGrid(int num_procs, int grid_size, SubGrid* subgrid);
 char** create_2d_char_array(int row_count, int column_count);
 char** parallelFileRead(const char* path, int rank, int num_procs, SubGrid* subgrid);
 void parallelFileWrite(const char* destination_file, int rank, int total_procs, int grid_size, SubGrid* subgrid, char** proc_grid);
-
+void simulateGOL(char** cur_step_grid, int my_rank, int num_procs, MPI_Comm comm, NeighborRanks* neighbors, SubGrid* subgrid, Arguments* args);
 
 #endif // MPI_UTILS_H

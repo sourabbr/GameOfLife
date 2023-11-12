@@ -173,7 +173,7 @@ void simulateGOL(char** cur_step_grid, int my_rank, int num_procs, MPI_Comm comm
         MPI_Waitall(8, send, status);
 
         // Output current step grid
-        parallelFileWrite(args->output_file, my_rank, num_procs, args->grid_size, subgrid, cur_step_grid);
+        parallelFileWrite(args->output_file_name, my_rank, num_procs, args->grid_size, subgrid, cur_step_grid);
 
         // Wait for all processes to finish writing to output file
         MPI_Barrier(MPI_COMM_WORLD);
