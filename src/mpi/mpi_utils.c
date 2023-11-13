@@ -156,13 +156,13 @@ void simulateGOL(char** cur_step_grid, int my_rank, int num_procs, MPI_Comm comm
         MPI_Isend(&cur_step_grid[subgrid->rows][subgrid->cols], 1, MPI_CHAR, neighbors->down_right, 0, comm, &send[7]);
 
         // No need to wait for receive from all neighbor processes for calculating next step for inner grid
-        // S_TODO: Calculate inner grid
+        compute_inner( subgrid, cur_step_grid, next_step_grid);
 
         // Wait to receive from all neighbor processes.
         MPI_Waitall(8, recv, status);
 
         // Now, we can calculate the next step for outer grid
-        // S_TODO: Calculate outer grid
+        compute_outer( subgrid, cur_step_grid, next_step_grid);
 
         // Update current step grid with calculated next step grid
         temp = cur_step_grid;
