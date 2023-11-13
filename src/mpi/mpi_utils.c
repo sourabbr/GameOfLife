@@ -1,4 +1,5 @@
 #include "mpi_utils.h"
+#include "game_rules.h"
 
 void determineAdjacentRanks(MPI_Comm comm, NeighborRanks* neighbor_ranks) {
     // Shifts for the Cartesian topology

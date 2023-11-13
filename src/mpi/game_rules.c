@@ -33,7 +33,7 @@ int compute_inner(SubGrid* sub_grid, char** prev, char** next){
     #pragma omp parallel for collapse(2) schedule(static)
 
     for(int i = 2;i <= sub_grid->rows-1;i++){
-        for(int j = 2;j <= sub_grid->columns-1;j++){
+        for(int j = 2;j <= sub_grid->cols-1;j++){
 
             //Calculate the structures near the cell that 
             //we are going yo evolve
@@ -60,7 +60,7 @@ int compute_outer(SubGrid* sub_grid, char** prev, char** next){
     
     //first row
     #pragma omp parallel for schedule(static)
-    for(int j=1;j<=sub_grid->columns;++j){
+    for(int j=1;j<=sub_grid->cols;++j){
         int i = 1;
         int alive = process_neighbors(i, j, prev);
 
@@ -81,7 +81,7 @@ int compute_outer(SubGrid* sub_grid, char** prev, char** next){
 
     //last row
     #pragma omp parallel for schedule(static)
-    for(int j=1;j<=sub_grid->columns;++j){
+    for(int j=1;j<=sub_grid->cols;++j){
         int i = sub_grid->rows;
         int alive = process_neighbors(i, j, prev);
         if(game_execution_rules(i , j, alive, prev, next) == 1){
@@ -92,7 +92,7 @@ int compute_outer(SubGrid* sub_grid, char** prev, char** next){
     //last column
     #pragma omp parallel for schedule(static)
     for(int i=1;i<=sub_grid->rows;++i){
-        int j = sub_grid->columns;
+        int j = sub_grid->cols;
         int alive = process_neighbors(i, j, prev);
         if(game_execution_rules(i , j, alive, prev, next) == 1){
             modified = 1;
