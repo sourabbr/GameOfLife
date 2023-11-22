@@ -7,28 +7,29 @@
 
 std::vector<State> states;
 int currentState = 0;
+int gridSize;
 
 void init() {
     glClearColor(1.0, 1.0, 1.0, 1.0); // Set background color to white
     glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0, GRID_SIZE, 0, GRID_SIZE); // Set coordinate system
+    gluOrtho2D(0, gridSize, 0, gridSize); // Set coordinate system dynamically
 }
 
 void drawGrid() {
     glColor3f(0.0, 0.0, 0.0); // Set grid color to black
     glLineWidth(1.0); // Set line width for the grid
 
-    for (int i = 0; i <= GRID_SIZE; i++) {
+    for (int i = 0; i <= gridSize; i++) {
         // Vertical lines
         glBegin(GL_LINES);
         glVertex2f(i, 0);
-        glVertex2f(i, GRID_SIZE);
+        glVertex2f(i, gridSize);
         glEnd();
 
         // Horizontal lines
         glBegin(GL_LINES);
         glVertex2f(0, i);
-        glVertex2f(GRID_SIZE, i);
+        glVertex2f(gridSize, i);
         glEnd();
     }
 }
@@ -51,9 +52,9 @@ void display() {
     drawGrid(); // Draw the grid
 
     State& current = states[currentState];
-    for (int i = 0; i < GRID_SIZE; ++i) {
-        for (int j = 0; j < GRID_SIZE; ++j) {
-            if (current.grid[i][j] == 1) {
+    for (int i = 0; i < gridSize; ++i) {
+        for (int j = 0; j < gridSize; ++j) {
+            if (current.grid[i][j]) {
                 drawCell(j, i); // Draw cell
             }
         }
@@ -71,6 +72,9 @@ void timer(int) {
 
 int main(int argc, char** argv) {
     states = StateReader::readGameOfLifeStates("output/out2.txt");
+    if (!states.empty()) {
+        gridSize = states[0].grid.size(); // Get grid size from the first state
+    }
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
