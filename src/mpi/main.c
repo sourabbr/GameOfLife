@@ -26,6 +26,10 @@ int main(int argc, char** argv) {
     parseArguments(argc, argv, &args);
     if (my_rank == 0) {
         printArguments(&args);
+        // Write the grid size to the output file
+        FILE* output_file = fopen(args.output_file_name, "w");
+        fprintf(output_file, "%d\n", args.grid_size);
+        fclose(output_file);
     }
 
     // Create cartesian topology for processes and assign neighbours
