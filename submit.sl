@@ -6,4 +6,7 @@
 #SBATCH --output=game_of_life.out
 #SBATCH -A anakano_429
 
-mpirun -bind-to none -n $SLURM_NTASKS ./bin/game_of_life -l 10 -n 4 -i input/16.txt -o out.txt
+
+mkdir -p output
+
+mpirun -bind-to none -n $SLURM_NTASKS ./bin/game_of_life -l 10 -n 4 -i input/16.txt -o output/out.txt
