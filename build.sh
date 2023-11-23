@@ -12,7 +12,7 @@ OUTPUT_BINARY="$BIN_DIR/game_of_life"
 compile() {
     mkdir -p $BIN_DIR
     # gcc -o $OUTPUT_BINARY $SOURCE_FILES
-    mpicc -o $OUTPUT_BINARY $SOURCE_FILES -lm
+    mpicc -fopenmp -O -o $OUTPUT_BINARY $SOURCE_FILES -lm
     if [ $? -eq 0 ]; then
         echo "Compilation successful. Binary created: $OUTPUT_BINARY"
     else
