@@ -39,19 +39,40 @@ In this documentation, videos of various patterns in Conway's Game of Life are i
   - Block
   - Beehive
   - Loaf
+  - Boat
+- ![Idle GIF](openGL/videos/idle.gif)
 
 #### Oscillators
 - **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
 - **Examples**: 
   - Pulsar
+- ![Pulsar GIF](openGL/videos/pulsar.gif)
 
 #### Spaceships
 - **Definition**: Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
 - **Examples**: 
   - Glider (diagonally moving)
+- ![Glider GIF](openGL/videos/glider.gif)
+  - MSM Breeder
+- ![MSM Breeder GIF](openGL/videos/glider.gif)
+  
 
 #### Visualization of Patterns with Random Inputs
 
+### Grid Size: 16x16
+- ![16x16 GIF](openGL/videos/16.gif)
+
+### Grid Size: 32x32
+- ![32x32 GIF](openGL/videos/32.gif)
+
+### Grid Size: 64x64
+- ![64x64 GIF](openGL/videos/64.gif)
+
+### Grid Size: 128x128
+- ![128x128 GIF](openGL/videos/128.gif)
+
+### Grid Size: 256x256
+- ![256x256 GIF](openGL/videos/256.gif)
 
 
 
