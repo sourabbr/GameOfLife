@@ -46,15 +46,15 @@ In this documentation, videos of various patterns in Conway's Game of Life are i
 - **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
 - **Examples**: 
   - Pulsar
-- ![Pulsar GIF](openGL/videos/pulsar.gif)
+- ![Pulsar GIF](openGL/videos/oscillator.gif)
 
 #### Spaceships
 - **Definition**: Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
-- **Examples**: 
-  - Glider (diagonally moving)
-- ![Glider GIF](openGL/videos/glider.gif)
+- **Examples**:
+  - Glider gun
+- ![Glider GIF](openGL/videos/glider-gun.gif)
   - MSM Breeder
-- ![MSM Breeder GIF](openGL/videos/glider.gif)
+- ![MSM Breeder GIF](openGL/videos/breeder1.gif)
   
 
 #### Visualization of Patterns with Random Inputs
