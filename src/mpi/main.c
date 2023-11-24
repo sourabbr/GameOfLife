@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
     parseArguments(argc, argv, &args);
     if (my_rank == 0) {
         printArguments(&args);
+        printf("Number of processes: %d\n", num_procs);
+        printf("*********************\n");
         // Write the grid size to the output file
         FILE* output_file = fopen(args.output_file_name, "w");
         fprintf(output_file, "%d\n", args.grid_size);
@@ -68,6 +70,7 @@ int main(int argc, char** argv) {
     MPI_Reduce(&time_elapsed, &global_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         printf("Time elapsed: %f seconds\n", global_time);
+        printf("******************************************\n");
     }
 
     // Free the entrie grid
