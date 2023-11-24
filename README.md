@@ -13,15 +13,15 @@ For smaller grid sizes upto *8192x8192*, it was noticed that the serial program 
 
 ### Parallel Run Time
 Parallel run time is the time taken to run the simulation using MPI and OpenMP.
-
+<img>![runtime](plots/parallel_runtime.png)</img>
 
 ### Speedup
 Speedup is the ratio of the serial run time to the parallel run time.
-
+<img>![runtime](plots/speedup.png)</img>
 
 ### Efficiency
 Efficiency is the ratio of the speedup to the number of MPI processes.
-
+<img>![runtime](plots/efficiency.png)</img>
 
 ## OpenGL Simulations
 ### Overview
