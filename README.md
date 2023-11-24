@@ -23,9 +23,36 @@ Speedup is the ratio of the serial run time to the parallel run time.
 ### Efficiency
 Efficiency is the ratio of the speedup to the number of MPI processes.
 
-
 ## OpenGL Simulations
+### Overview
+In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
 
+#### Still Lifes
+Stable patterns that do not change over generations, symbolizing equilibrium.
+Examples: Block, Beehive, Loaf, Boat
+
+#### Oscillators
+Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
+Examples: Pulsar
+
+#### Spaceships
+Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
+Examples: Glider gun, MSM Breeder
+
+| Still Lifes | Oscillators | Spaceships |
+|:-----------:|:-----------:|:----------:|
+| ![idle](openGL/videos/idle.gif) | ![oscillator](openGL/videos/oscillator.gif) | ![glider-gun](openGL/videos/glider-gun.gif) |
+| | | ![msm-breeder](openGL/videos/breeder1.gif) |
+
+### Visualization of Patterns with Random Inputs
+
+| Grid Size: 16x16 | Grid Size: 32x32 | Grid Size: 64x64 |
+|:----------------:|:----------------:|:----------------:|
+| ![16](openGL/videos/16.gif) | ![32](openGL/videos/32.gif) | ![64](openGL/videos/64.gif) |
+
+| Grid Size: 128x128 | Grid Size: 256x256 |
+|:------------------:|:------------------:|
+| ![128](openGL/videos/128.gif) | ![256](openGL/videos/256.gif) |
 
 
 ## Compilation and Execution
@@ -55,52 +82,5 @@ The script can be submitted to the cluster using the following command:
 sbatch submit.sl
 ```
 Post completion of the job, the output file will be created, and the program output will be written in ***game_of_life.out***.
-
-## Simulation Patterns
-
-### Overview
-In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
-
-#### Still Lifes
-- **Definition**: Stable patterns that do not change over generations, symbolizing equilibrium.
-- **Examples**: 
-  - Block
-  - Beehive
-  - Loaf
-  - Boat
-<img src="openGL/videos/idle.gif" width="300" height="300" alt="idle">
-
-#### Oscillators
-- **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
-- **Examples**: 
-  - Pulsar
-<img src="openGL/videos/oscillator.gif" width="300" height="300" alt="oscillator">
-
-#### Spaceships
-- **Definition**: Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
-- **Examples**:
-  - Glider gun
-<img src="openGL/videos/glider-gun.gif" width="300" height="300" alt="glider-gun">
-  - MSM Breeder
-<img src="openGL/videos/breeder1.gif" width="300" height="300" alt="msm-breeder">
-  
-
-#### Visualization of Patterns with Random Inputs
-
-### Grid Size: 16x16
-<img src="openGL/videos/16.gif" width="300" height="300" alt="16">
-
-### Grid Size: 32x32
-<img src="openGL/videos/32.gif" width="300" height="300" alt="32">
-
-### Grid Size: 64x64
-<img src="openGL/videos/64.gif" width="300" height="300" alt="64">
-
-### Grid Size: 128x128
-<img src="openGL/videos/128.gif" width="300" height="300" alt="128">
-
-### Grid Size: 256x256
-<img src="openGL/videos/256.gif" width="300" height="300" alt="256">
-
 
 
