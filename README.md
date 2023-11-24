@@ -46,33 +46,33 @@ In this documentation, videos of various patterns in Conway's Game of Life are i
 - **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
 - **Examples**: 
   - Pulsar
-- ![Pulsar GIF](openGL/videos/oscillator.gif)
+<img src="openGL/videos/oscillator.gif" width="300" height="300" alt="oscillator">
 
 #### Spaceships
 - **Definition**: Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
 - **Examples**:
   - Glider gun
-- ![Glider GIF](openGL/videos/glider-gun.gif)
+<img src="openGL/videos/glider-gun.gif" width="300" height="300" alt="glider-gun">
   - MSM Breeder
-- ![MSM Breeder GIF](openGL/videos/breeder1.gif)
+<img src="openGL/videos/breeder1.gif" width="300" height="300" alt="msm-breeder">
   
 
 #### Visualization of Patterns with Random Inputs
 
 ### Grid Size: 16x16
-- ![16x16 GIF](openGL/videos/16.gif)
+<img src="openGL/videos/16.gif" width="300" height="300" alt="16">
 
 ### Grid Size: 32x32
-- ![32x32 GIF](openGL/videos/32.gif)
+<img src="openGL/videos/32.gif" width="300" height="300" alt="32">
 
 ### Grid Size: 64x64
-- ![64x64 GIF](openGL/videos/64.gif)
+<img src="openGL/videos/64.gif" width="300" height="300" alt="64">
 
 ### Grid Size: 128x128
-- ![128x128 GIF](openGL/videos/128.gif)
+<img src="openGL/videos/128.gif" width="300" height="300" alt="128">
 
 ### Grid Size: 256x256
-- ![256x256 GIF](openGL/videos/256.gif)
+<img src="openGL/videos/256.gif" width="300" height="300" alt="256">
 
 
 
