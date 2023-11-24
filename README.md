@@ -40,7 +40,7 @@ In this documentation, videos of various patterns in Conway's Game of Life are i
   - Beehive
   - Loaf
   - Boat
-- ![Idle GIF](openGL/videos/idle.gif)
+<img src="openGL/videos/idle.gif" width="320" height="320" alt="idle">
 
 #### Oscillators
 - **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
