@@ -1,6 +1,35 @@
 # GameOfLife
 
-## Compilation of MPI and OpenMP source code
+
+
+## Benchmarking
+The simulation of Game of Life is run for 100 iterations for different grid sizes with *1, 2, 4, 8, 16, 32, 64* MPI processes with *2* OpenMP threads per MPI process. The simulation is run on the HPC cluster with the following resource requisition:
+```
+#SBATCH --nodes=8
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=2
+```
+
+For smaller grid sizes upto *8192x8192*, it was noticed that the serial program outperformed the parallel program. This is because the overhead of parallelization is more than the time taken to run the simulation serially. For larger grid sizes, the parallel program outperformed the serial program. The following graphs show the run time, speedup and efficiency for the simulation of Game of Life for different grid sizes and number of MPI processes. 
+
+### Parallel Run Time
+Parallel run time is the time taken to run the simulation using MPI and OpenMP.
+
+
+### Speedup
+Speedup is the ratio of the serial run time to the parallel run time.
+
+
+### Efficiency
+Efficiency is the ratio of the speedup to the number of MPI processes.
+
+
+## OpenGL Simulations
+
+
+
+## Compilation and Execution
+### Compilation of MPI and OpenMP source code
 In the project directory, run the following command:
 ```
 ./build.sh compile
@@ -16,8 +45,7 @@ The binary and output files can be removed by running:
 ```
 ./build.sh clean
 ```
-
-## Submit job to HPC cluster using SLURM
+### Submit job to HPC cluster using SLURM
 The ***submit.sl*** file contains the SLURM script to submit the job to the HPC cluster. The script can be modified to change the number of nodes, number of tasks per node, number of threads per task, etc. It uses the following command to run the simulation:
 ```
 mpirun -bind-to none -n no_of_procs ./bin/game_of_life -l number_of_iterations -n grid_size -i input_file_name -o output_file_name
