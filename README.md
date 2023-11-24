@@ -1,28 +1,5 @@
 # GameOfLife
 
-
-
-## Benchmarking
-The simulation of Game of Life is run for 100 iterations for different grid sizes with *1, 2, 4, 8, 16, 32, 64* MPI processes with *2* OpenMP threads per MPI process. The simulation is run on the HPC cluster with the following resource requisition:
-```
-#SBATCH --nodes=8
-#SBATCH --ntasks-per-node=8
-#SBATCH --cpus-per-task=2
-```
-For smaller grid sizes upto *8192x8192*, it was noticed that the serial program outperformed the parallel program. This is because the overhead of parallelization is more than the time taken to run the simulation serially. For larger grid sizes, the parallel program outperformed the serial program. The run times for each grid can be found in *output/runtime_output* folder. The following graphs show the run time, speedup and efficiency for the simulation of Game of Life for different grid sizes and number of MPI processes. 
-
-### Parallel Run Time
-Parallel run time is the time taken to run the simulation using MPI and OpenMP.
-<img>![runtime](plots/parallel_runtime.png)</img>
-
-### Speedup
-Speedup is the ratio of the serial run time to the parallel run time.
-<img>![runtime](plots/speedup.png)</img>
-
-### Efficiency
-Efficiency is the ratio of the speedup to the number of MPI processes.
-<img>![runtime](plots/efficiency.png)</img>
-
 ## OpenGL Simulations
 ### Overview
 In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
@@ -54,6 +31,26 @@ Examples: *Glider gun, MSM Breeder*
 |:------------------:|:------------------:|
 | ![128](openGL/videos/128.gif) | ![256](openGL/videos/256.gif) |
 
+## Benchmarking
+The simulation of Game of Life is run for 100 iterations for different grid sizes with *1, 2, 4, 8, 16, 32, 64* MPI processes with *2* OpenMP threads per MPI process. The simulation is run on the HPC cluster with the following resource requisition:
+```
+#SBATCH --nodes=8
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=2
+```
+For smaller grid sizes upto *8192x8192*, it was noticed that the serial program outperformed the parallel program. This is because the overhead of parallelization is more than the time taken to run the simulation serially. For larger grid sizes, the parallel program outperformed the serial program. The run times for each grid can be found in *output/runtime_output* folder. The following graphs show the run time, speedup and efficiency for the simulation of Game of Life for different grid sizes and number of MPI processes. 
+
+### Parallel Run Time
+Parallel run time is the time taken to run the simulation using MPI and OpenMP.
+<img>![runtime](plots/parallel_runtime.png)</img>
+
+### Speedup
+Speedup is the ratio of the serial run time to the parallel run time.
+<img>![runtime](plots/speedup.png)</img>
+
+### Efficiency
+Efficiency is the ratio of the speedup to the number of MPI processes.
+<img>![runtime](plots/efficiency.png)</img>
 
 ## Compilation and Execution
 ### Compilation of MPI and OpenMP source code
