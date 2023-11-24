@@ -28,3 +28,30 @@ sbatch submit.sl
 ```
 Post completion of the job, the output file will be created, and the program output will be written in ***game_of_life.out***.
 
+## Simulation Patterns
+
+### Overview
+In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
+
+#### Still Lifes
+- **Definition**: Stable patterns that do not change over generations, symbolizing equilibrium.
+- **Examples**: 
+  - Block
+  - Beehive
+  - Loaf
+
+#### Oscillators
+- **Definition**: Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
+- **Examples**: 
+  - Pulsar
+
+#### Spaceships
+- **Definition**: Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
+- **Examples**: 
+  - Glider (diagonally moving)
+
+#### Visualization of Patterns with Random Inputs
+
+
+
+
