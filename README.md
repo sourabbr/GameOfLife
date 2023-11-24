@@ -9,8 +9,7 @@ The simulation of Game of Life is run for 100 iterations for different grid size
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=2
 ```
-
-For smaller grid sizes upto *8192x8192*, it was noticed that the serial program outperformed the parallel program. This is because the overhead of parallelization is more than the time taken to run the simulation serially. For larger grid sizes, the parallel program outperformed the serial program. The following graphs show the run time, speedup and efficiency for the simulation of Game of Life for different grid sizes and number of MPI processes. 
+For smaller grid sizes upto *8192x8192*, it was noticed that the serial program outperformed the parallel program. This is because the overhead of parallelization is more than the time taken to run the simulation serially. For larger grid sizes, the parallel program outperformed the serial program. The run times for each grid can be found in *output/runtime_output* folder. The following graphs show the run time, speedup and efficiency for the simulation of Game of Life for different grid sizes and number of MPI processes. 
 
 ### Parallel Run Time
 Parallel run time is the time taken to run the simulation using MPI and OpenMP.
@@ -23,21 +22,22 @@ Speedup is the ratio of the serial run time to the parallel run time.
 ### Efficiency
 Efficiency is the ratio of the speedup to the number of MPI processes.
 
+
 ## OpenGL Simulations
 ### Overview
 In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
 
 #### Still Lifes
 Stable patterns that do not change over generations, symbolizing equilibrium.
-Examples: Block, Beehive, Loaf, Boat
+Examples: *Block, Beehive, Loaf, Boat*
 
 #### Oscillators
 Patterns that return to their initial state after a finite number of generations, depicting periodic behavior.
-Examples: Pulsar
+Examples: *Pulsar*
 
 #### Spaceships
 Patterns that move across the grid, maintaining their shape but changing location, demonstrating motion.
-Examples: Glider gun, MSM Breeder
+Examples: *Glider gun, MSM Breeder*
 
 | Still Lifes | Oscillators | Spaceships |
 |:-----------:|:-----------:|:----------:|
