@@ -19,7 +19,7 @@ Based on the definition of Conway's Game Of Life, we implemented the following r
 And we return a flag ('modified') indicating whether the state of the cell was modified.
 
 ### OpenMP
-We used the OpenMP directive to parallelize the nested loops in the compute_inner and compute_outer functions, distributing the workload among multiple threads to potentially improve performance in a shared-memory parallel computing environment.
+We used the OpenMP directive to parallelize the nested loops in the ***compute_inner*** and ***compute_outer*** functions, distributing the workload among multiple threads to potentially improve performance in a shared-memory parallel computing environment.
 - collapse(2) is specifically used in the compute_inner function to collapse nested loops into a single loop for more efficient parallelization
 - The schedule(static) ensures a static (fixed-size) distribution of loop iterations among the threads
 
