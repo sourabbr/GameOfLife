@@ -1,23 +1,35 @@
 # GameOfLife
 
 ## Introduction to Conway's Game Of Life
-The Game Of Life is a cellular automation that was designed by John Horton Conway in 1970. It is a game of simulation where the evolution of the world is determined by its initial state, requiring no further input. The game is played on an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+The Game Of Life is a cellular automation that was designed by John Horton Conway in 1970. It is a game of simulation where the evolution of the world is determined by its initial state, requiring no further input. The game is played on an infinite two-dimensional orthogonal grid of square cells, each in one of two possible states, alive or dead. Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 * Any live cell with fewer than two alive neighbors dies - underpopulation
 * Any live cell with more than three alive neighbors dies - overpopulation
 * Any dead cell with exactly three alive neighbors becomes a live cell - reproduction
 * Any live cell with two or three live neighbors lives on to the next generation
 
-The game is known for its simple rules but its complex and unpredictable behavior, demonstrating the fact that simple interactions between individual organisms can give rise to complex and dynamic patterns of life at the population level.
+The game is known for its simple rules. Still, its complex and unpredictable behavior demonstrates the fact that simple interactions between individual organisms can give rise to complex and dynamic patterns of life at the population level.
 
 ## Our Implementation
+We implemented parallelization using MPI and OpenMP. Our program receives a (N x N) grid as input. The grid data (consisting of 0s and 1s) should be arranged as a single row in a plain text file. This means that a 16 x 16 grid  would require a file containing 256 characters.
+
+### Game Execution
+Based on the definition of Conway's Game Of Life, we implemented the following rules:
+* If a cell is dead (prev[i][j] != '1'), and it has exactly 3 live neighbors (alive == 3), it becomes alive in the next generation (next[i][j] = '1')
+* If a cell is alive (prev[i][j] == '1'), and it has fewer than 2 or more than 3 live neighbors, it dies in the next generation (next[i][j] = '0')
+And we return a flag ('modified') indicating whether the state of the cell was modified.
+
+### OpenMP
+We used the OpenMP directive to parallelize the nested loops in the compute_inner and compute_outer functions, distributing the workload among multiple threads to potentially improve performance in a shared-memory parallel computing environment.
+- collapse(2) is specifically used in the compute_inner function to collapse nested loops into a single loop for more efficient parallelization
+- The schedule(static) ensures a static (fixed-size) distribution of loop iterations among the threads
 
 
 ## OpenGL Simulations
 ### Overview
-In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
+In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include pattern demonstrations using predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
 
 #### Still Lifes
-Stable patterns that do not change over generations, symbolizing equilibrium.
+Stable patterns that do not change over generations symbolizing equilibrium.
 Examples: *Block, Beehive, Loaf, Boat*
 
 #### Oscillators
