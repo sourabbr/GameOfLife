@@ -1,5 +1,17 @@
 # GameOfLife
 
+## Introduction to Conway's Game Of Life
+The Game Of Life is a cellular automation that was designed by John Horton Conway in 1970. It is a game of simulation where the evolution of the world is determined by its initial state, requiring no further input. The game is played on an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbors, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+* Any live cell with fewer than two alive neighbors dies - underpopulation
+* Any live cell with more than three alive neighbors dies - overpopulation
+* Any dead cell with exactly three alive neighbors becomes a live cell - reproduction
+* Any live cell with two or three live neighbors lives on to the next generation
+
+The game is known for its simple rules but its complex and unpredictable behavior, demonstrating the fact that simple interactions between individual organisms can give rise to complex and dynamic patterns of life at the population level.
+
+## Our Implementation
+
+
 ## OpenGL Simulations
 ### Overview
 In this documentation, videos of various patterns in Conway's Game of Life are included, all rendered using OpenGL for enhanced graphical representation. These include demonstrations of patterns using both predefined and random input files across different grid sizes. The focus is on the following primary pattern types:
