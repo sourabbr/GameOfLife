@@ -14,14 +14,14 @@ We implemented parallelization using MPI and OpenMP. Our program receives a (N x
 
 ### Game Execution
 Based on the definition of Conway's Game Of Life, we implemented the following rules:
-* If a cell is dead (prev[i][j] != '1'), and it has exactly 3 live neighbors (alive == 3), it becomes alive in the next generation (next[i][j] = '1')
-* If a cell is alive (prev[i][j] == '1'), and it has fewer than 2 or more than 3 live neighbors, it dies in the next generation (next[i][j] = '0')
+* If a cell is dead *(prev[i][j] != '1')*, and it has exactly 3 live neighbors (alive == 3), it becomes alive in the next generation *(next[i][j] = '1')*
+* If a cell is alive *(prev[i][j] == '1')*, and it has fewer than 2 or more than 3 live neighbors, it dies in the next generation *(next[i][j] = '0')*
 And we return a flag ('modified') indicating whether the state of the cell was modified.
 
 ### OpenMP
 We used the OpenMP directive to parallelize the nested loops in the ***compute_inner*** and ***compute_outer*** functions, distributing the workload among multiple threads to potentially improve performance in a shared-memory parallel computing environment.
-- collapse(2) is specifically used in the compute_inner function to collapse nested loops into a single loop for more efficient parallelization
-- The schedule(static) ensures a static (fixed-size) distribution of loop iterations among the threads
+- *collapse(2)* is specifically used in the compute_inner function to collapse nested loops into a single loop for more efficient parallelization
+- The *schedule(static)* ensures a static (fixed-size) distribution of loop iterations among the threads
 
 
 ## OpenGL Simulations
