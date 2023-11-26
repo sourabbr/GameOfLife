@@ -18,6 +18,14 @@ Based on the definition of Conway's Game Of Life, we implemented the following r
 * If a cell is alive *(prev[i][j] == '1')*, and it has fewer than 2 or more than 3 live neighbors, it dies in the next generation *(next[i][j] = '0')*
 And we return a flag ('modified') indicating whether the state of the cell was modified.
 
+### MPI
+We used MPI to distribute the workload among multiple processes by assigning subgrids to each process to potentially improve performance. We have considered using a perfect square number of processes (Eg: 1, 4, 9, 25, ...) to create a square grid of processes.
+- We use ***MPI_Dims_Create*** and ***MPI_Cart_Create*** to create a 2D Cartesian topology of processes. The ***MPI_Cart_Shift*** function is used to find the rank of the neighboring processes and assign as neighbors.
+- The input grid is then divided into subgrids based on number of processes, and each process is responsible for executing the rules of the game on its assigned subgrid. Each process by itself calculates the next state of its inner subgrid and sends the outer subgrid to its neighbors. The outer subgrid is received from the neighbors and used to calculate the next state of the outer subgrid.
+- ***MPI_Isend*** and ***MPI_Irecv*** are used to asynchronously send and receive from neighboring processes. Each process calculates its inner subgrid values without waiting to receive from its neighbors and only waits to calculate its outer subgrid values.
+- The ***MPI_Waitall*** function is used to wait for all the processes to complete the computation before proceeding to the next iteration.
+- This is repeated for the number of iterations specified by the user.
+
 ### OpenMP
 We used the OpenMP directive to parallelize the nested loops in the ***compute_inner*** and ***compute_outer*** functions, distributing the workload among multiple threads to potentially improve performance in a shared-memory parallel computing environment.
 - *collapse(2)* is specifically used in the compute_inner function to collapse nested loops into a single loop for more efficient parallelization
