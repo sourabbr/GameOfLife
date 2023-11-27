@@ -53,7 +53,7 @@ Examples: *Glider gun, MSM Breeder*
 | ![idle](openGL/videos/idle.gif) | ![oscillator](openGL/videos/oscillator.gif) | ![glider-gun](openGL/videos/glider-gun.gif) |
 
 #### Simulation of MSM Breeder (Spaceship)
-<img src="openGL/videos/breeder1.gif" width="1100" height="600">
+<img src="openGL/videos/breeder_1.gif" width="1100" height="600">
 
 ### Visualization of Patterns with Random Inputs
 
